@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Highlight.js</title>
+    <link rel="stylesheet" type="text/css" href="highlight.css">
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+    <script type="text/javascript" src="highlight.js"></script>
+    <script>
+    $(document).ready(function() {
+        var content = $('#content');
+        content.attr('data-orig-innerhtml', content.get(0).innerHTML);
+
+        $("#highlightButton").click(function() {
+            var $content = $('#content');
+            $content.get(0).innerHTML = $content.attr('data-orig-innerhtml'); // restore state before each highlight session
+            var start = parseInt($('#start').val(), 10);
+            var end = parseInt($('#end').val(), 10);
+            highlight(start, end, $content.get(0));
+        });
+
+        $('#plusend').click(function() {
+            $('#end').val(parseInt($('#end').val(), 10) + 1);
+            $('#highlightButton').click();
+        });
+        $('#plusstart').click(function() {
+            $('#start').val(parseInt($('#start').val(), 10) + 1);
+            $('#highlightButton').click();
+        });
+        $('#minusend').click(function() {
+            var minus = parseInt($('#end').val(), 10) - 1;
+            if (minus < 0) {
+                minus = 0;
+            }
+            $('#end').val(minus);
+            $('#highlightButton').click();
+        });
+        $('#minusstart').click(function() {
+            var minus = parseInt($('#start').val(), 10) - 1;
+            if (minus < 0) {
+                minus = 0;
+            }
+            $('#start').val(minus);
+            $('#highlightButton').click();
+        });
+    });
+    </script>
+</head>
+
+<body>
+    <header>
+        <h1>Demo</h1>
+    </header>
+    <div id="content" class="content">
+        <h2>Foo Bar Baz</h2>
+        <p>Lorem ipsum dolor sit amet, <strong>consectetur</strong> adipiscing elit. In nec urna elementum, molestie arcu iaculis, ullamcorper risus. Nunc sollicitudin pretium nulla quis porttitor. Proin eu risus finibus, scelerisque est a, condimentum nulla. Cras eu suscipit augue. Ut dapibus purus est. <u>Aenean enim quam</u>, eleifend et fermentum quis, semper eget eros. Sed volutpat ligula sit amet quam consequat, in gravida quam cursus. Ut tincidunt scelerisque mi ut sodales. Vestibulum a lorem ut justo convallis mattis. Quisque placerat eleifend dignissim. Nullam luctus justo vitae vehicula bibendum. Morbi ac urna ut est placerat faucibus posuere ac quam. Nunc consequat consectetur aliquam. Donec massa sapien, euismod vel felis in, facilisis vestibulum justo.</p>
+    </div>
+    <div class="highlight">
+        <label for="start">Start:</label>
+        <input type="text" id="start" value="0">
+        <label for="end">End:</label>
+        <input type="text" id="end" value="10">
+        <button id="highlightButton">Highlight</button>
+        <br />
+        <button id="plusstart">Start +</button>
+        <button id="minusstart">Start -</button>
+        <button id="plusend">End +</button>
+        <button id="minusend">End -</button>
+    </div>
+    <div id="error" class="error"></div>
+</body>
+
+</html>
