@@ -1,0 +1,39 @@
+html, body {
+    margin: 0;
+    padding: 0;
+}
+span.highlight {
+    background-color: yellow;
+}
+h1 {
+    background-color: #b6d4f1;
+    text-align: center;
+    border-bottom: 1px solid #000;
+    height: 50px;
+    margin-top: 0;
+}
+h2 {
+    text-align: center;
+}
+.content {
+    border: 1px solid #000;
+    margin-left: 25%;
+    margin-right: 25%;
+    height: 400px;
+    padding: 5px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    border-radius: 20px;
+}
+.highlight {
+    margin-top: 10px;
+    text-align: center;
+}
+.highlight input[type="text"] {
+    width: 50px;
+}
+.error {
+    margin-top: 5px;
+    color: red;
+    text-align: center;
+}

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>JS/CSS challenge</title>
+    <link rel="stylesheet" type="text/css" href="highlight.css">
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+    <script type="text/javascript" src="highlight.js"></script>
+    <script>
+    $(document).ready(function() {
+        var content = $('#content');
+        content.attr('data-orig-innerhtml', content.get(0).innerHTML);
+
+        $("#highlightButton").click(function() {
+            var $content = $('#content');
+            $content.get(0).innerHTML = $content.attr('data-orig-innerhtml'); // restore state before each highlight session
+            var start = parseInt($('#start').val(), 10);
+            var end = parseInt($('#end').val(), 10);
+            highlightRec(start, end, $content.get(0));
+        });
+
+        $('#plusend').click(function() {
+            $('#end').val(parseInt($('#end').val(), 10) + 1);
+            $('#highlightButton').click();
+        });
+        $('#plusstart').click(function() {
+            $('#start').val(parseInt($('#start').val(), 10) + 1);
+            $('#highlightButton').click();
+        });
+        $('#minusend').click(function() {
+            var minus = parseInt($('#end').val(), 10) - 1;
+            if (minus < 0) {
+                minus = 0;
+            }
+            $('#end').val(minus);
+            $('#highlightButton').click();
+        });
+        $('#minusstart').click(function() {
+            var minus = parseInt($('#start').val(), 10) - 1;
+            if (minus < 0) {
+                minus = 0;
+            }
+            $('#start').val(minus);
+            $('#highlightButton').click();
+        });
+    });
+    </script>
+</head>
+
+<body>
+    <header>
+        <h1>Let's pretend we care about this document</h1>
+    </header>
+    <div id="content" class="content">
+        <h2>Why do I do this</h2>
+        <p>Seriously? Brett. You make me do way too much work. <u>Well, I guess any <strong>work</strong> &gt; 0 is more work than I want to do.</u>
+        </p>
+        <p>You know what? <strong>YOU</strong> should be doing work. Not me. <strong>I</strong> shouldn't <em>have</em> to do anything</p>
+        <p>Here is a list of things I'd rather do right now than work on this nonsense:</p>
+
+        <p>But, who cares. <span>No one will save me.</span> I work for Lab49. Why even live?</p>
+    </div>
+    <div class="highlight">
+        <label for="start">Start:</label>
+        <input type="text" id="start" value="0">
+        <label for="end">End:</label>
+        <input type="text" id="end" value="10">
+        <button id="highlightButton">Highlight</button>
+        <br />
+        <button id="plusstart">Start +</button>
+        <button id="minusstart">Start -</button>
+        <button id="plusend">End +</button>
+        <button id="minusend">End -</button>
+    </div>
+    <div id="error" class="error"></div>
+</body>
+
+</html>
