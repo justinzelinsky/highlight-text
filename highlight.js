@@ -1,25 +1,25 @@
-function highlight(start, end, element) {
+function highlight(start, end, node) {
     if (start > end) {
         $('#error').text('Error: start index is before end index.');
         return;
     } else {
         $('#error').text('');
     }
-    replaceChildren(element, highlightRec(start, end, 0, element));
+    replaceChildren(node, highlightRec(start, end, 0, node));
 }
 
-function replaceChildren(element, newChildren) {
-    while (element.firstChild) element.removeChild(element.firstChild);
+function replaceChildren(node, newChildren) {
+    while (node.firstChild) node.removeChild(node.firstChild);
     for (var i = 0; i < newChildren.length; i++) {
-        element.appendChild(newChildren[i]);
+        node.appendChild(newChildren[i]);
     }
 }
 
-function highlightRec(start, end, index, element) {
+function highlightRec(start, end, index, node) {
     var length = end - start;
     var newChildren = [];
-    for (var i = 0; i < element.childNodes.length; i++) {
-        var currentNode = element.childNodes[i];
+    for (var i = 0; i < node.childNodes.length; i++) {
+        var currentNode = node.childNodes[i];
         var currentString = currentNode.textContent;
         var currentStringLength = currentString.length;
         var lowerRange = index;
