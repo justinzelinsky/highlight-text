@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Highlight.js</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="highlight.js"></script>
+
+    <style type="text/css">
+        .alert {
+            display: none;
+            text-align: center;
+        }
+
+        .controls {
+            margin: auto;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .controls input {
+            width: 50px;
+        }
+
+        span.highlight {
+            background-color: #FFFF00;
+        }
+    </style>
+
+    <script>
+        $(document).ready(function() {
+            $('.focus').attr('data-orig-innerhtml', $('.focus').get(0).innerHTML);
+
+            $("#highlight").click(function() {
+                $('.focus').get(0).innerHTML = $('.focus').attr('data-orig-innerhtml'); // restore state before each highlight session
+                var start = parseInt($('.start input').val(), 10);
+                var end = parseInt($('.end input').val(), 10);
+                highlight(start, end, $('.focus').get(0));
+            });
+
+            $('.start button.plus').click(function() {
+                $('#startIndex').val(parseInt($('#startIndex').val(), 10) + 1);
+                $('#highlight').click();
+            });
+            $('.start button.minus').click(function() {
+                var minus = parseInt($('#startIndex').val(), 10) - 1;
+                if (minus < 0) {
+                    minus = 0;
+                }
+                $('#startIndex').val(minus);
+                $('#highlight').click();
+            });
+            $('.end button.plus').click(function() {
+                $('#endIndex').val(parseInt($('#endIndex').val(), 10) + 1);
+                $('#highlight').click();
+            });
+            $('.end button.minus').click(function() {
+                var minus = parseInt($('#endIndex').val(), 10) - 1;
+                if (minus < 0) {
+                    minus = 0;
+                }
+                $('#endIndex').val(minus);
+                $('#highlight').click();
+            });
+        });
+    </script>
+
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                <h1 class="text-center">Highlight.js example</h1>
+                <div class="jumbotron">
+                    <p>
+                        This is a demo of a basic task I was given when I was first learning Javascript. You can click either of the arrows to move the highlighter forward or backwards in the text
+                    </p>
+
+                    <div class="controls">
+                        <div class="start">
+                            Start Index
+                            <input id="startIndex" value="0" />
+                            <button type="button" class="btn btn-sm btn-default plus"><i class="fa fa-plus" aria-hidden="true"></i></button>
+                            <button type="button" class="btn btn-sm btn-default minus"><i class="fa fa-minus" aria-hidden="true"></i></button>
+                        </div>
+                        <button type="button" id="highlight" class="btn btn-sm btn-default">Highlight</button>
+                        <div class="end">
+                            End Index
+                            <input id="endIndex" value="50" />
+                            <button type="button" class="btn btn-sm btn-default plus"><i class="fa fa-plus" aria-hidden="true"></i></button>
+                            <button type="button" class="btn btn-sm btn-default minus"><i class="fa fa-minus" aria-hidden="true"></i></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="well">
+                    <p class="focus">Lorem ipsum dolor sit amet, <strong>consectetur</strong> adipiscing elit. Maecenas sed diam eget risus varius blandit sit amet non magna. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Cras mattis consectetur purus sit amet fermentum. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Aenean lacinia bibendum nulla sed consectetur.</p>
+                </div>
+
+                <div class="alert alert-danger" role="alert">
+                    <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> <strong>Error:</strong> The start index is before the end index.
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+</body>
+
+</html>
